@@ -20,7 +20,7 @@ const petValidation = [
   check('age')
     .notEmpty()
     .withMessage('Age is required')
-    .isInt()
+    .isFloat()
     .withMessage('Age must be a number'),
 
   check('gender').notEmpty().withMessage('Gender is required'),
@@ -28,7 +28,7 @@ const petValidation = [
   check('weight')
     .notEmpty()
     .withMessage('Weight is required')
-    .isInt()
+    .isFloat()
     .withMessage('Weight must be a number'),
 
   check('available')

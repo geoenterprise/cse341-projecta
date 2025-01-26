@@ -1,8 +1,9 @@
 const express = require('express');
-const mongodb = require('./data/db');
+const mongodb = require('../data/db');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAllPets = async (req, res) => {
+  //#swagger.tags = ['Pets']
   const result = await mongodb.getDb().db().collection('pets').find();
   result.toArray().then((pets) => {
     res.setHeader('Content-Type', 'application/json');
@@ -11,6 +12,7 @@ const getAllPets = async (req, res) => {
 };
 
 const getSinglePet = async (req, res) => {
+  //#swagger.tags = ['Pets']
   const petId = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
@@ -24,6 +26,7 @@ const getSinglePet = async (req, res) => {
 };
 
 const createPet = async (req, res) => {
+  //#swagger.tags = ['Pets']
   const newPet = {
     name: req.body.name,
     species: req.body.species,
@@ -41,13 +44,14 @@ const createPet = async (req, res) => {
     .collection('pets')
     .insertOne(newPet);
   if (result.aknowledged > 0) {
-    res.status(204).send('Pet created successfully');
+    res.status(204).send();
   } else {
     res.status(500).json(result.err || 'Error creating pet');
   }
 };
 
 const updatePet = async (req, res) => {
+  //#swagger.tags = ['Pets']
   const petId = new ObjectId(req.params.id);
   const updatedPet = {
     name: req.body.name,
@@ -66,13 +70,14 @@ const updatePet = async (req, res) => {
     .collection('pets')
     .updateOne({ _id: petId }, { $set: updatedPet });
   if (result.modifiedCount > 0) {
-    res.status(204).send('Pet updated successfully');
+    res.status(204).send();
   } else {
     res.status(500).json(result.err || 'Error updating pet');
   }
 };
 
 const deletePet = async (req, res) => {
+  //#swagger.tags = ['Pets']
   const petId = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
@@ -80,7 +85,7 @@ const deletePet = async (req, res) => {
     .collection('pets')
     .deleteOne({ _id: petId });
   if (result.deletedCount > 0) {
-    res.status(204).send('Pet deleted successfully');
+    res.status(204).send();
   } else {
     res.status(500).json(result.err || 'Error deleting pet');
   }

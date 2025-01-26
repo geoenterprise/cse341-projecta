@@ -5,10 +5,10 @@
     "description": "API to manage contacts",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341-projecta.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/": {
@@ -33,6 +33,9 @@
     },
     "/users/": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -44,6 +47,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -52,31 +58,16 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "userName": {
                   "example": "any"
                 },
-                "species": {
+                "email": {
                   "example": "any"
                 },
-                "breed": {
+                "password": {
                   "example": "any"
                 },
-                "age": {
-                  "example": "any"
-                },
-                "gender": {
-                  "example": "any"
-                },
-                "weight": {
-                  "example": "any"
-                },
-                "available": {
-                  "example": "any"
-                },
-                "adoptedDate": {
-                  "example": "any"
-                },
-                "description": {
+                "role": {
                   "example": "any"
                 }
               }
@@ -98,6 +89,9 @@
     },
     "/users/{id}": {
       "get": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -117,6 +111,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -131,31 +128,16 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "userName": {
                   "example": "any"
                 },
-                "species": {
+                "email": {
                   "example": "any"
                 },
-                "breed": {
+                "password": {
                   "example": "any"
                 },
-                "age": {
-                  "example": "any"
-                },
-                "gender": {
-                  "example": "any"
-                },
-                "weight": {
-                  "example": "any"
-                },
-                "available": {
-                  "example": "any"
-                },
-                "adoptedDate": {
-                  "example": "any"
-                },
-                "description": {
+                "role": {
                   "example": "any"
                 }
               }
@@ -175,6 +157,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Users"
+        ],
         "description": "",
         "parameters": [
           {
@@ -196,6 +181,9 @@
     },
     "/pets/": {
       "get": {
+        "tags": [
+          "Pets"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -207,6 +195,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Pets"
+        ],
         "description": "",
         "parameters": [
           {
@@ -261,6 +252,9 @@
     },
     "/pets/{id}": {
       "get": {
+        "tags": [
+          "Pets"
+        ],
         "description": "",
         "produces": [
           "application/json"
@@ -280,6 +274,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Pets"
+        ],
         "description": "",
         "parameters": [
           {
@@ -338,6 +335,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Pets"
+        ],
         "description": "",
         "parameters": [
           {
