@@ -1,0 +1,68 @@
+### Get All Users
+GET http://localhost:3000/users
+
+### Get Single User
+GET http://localhost:3000/users/64a7fbd17eb1b8f23c452002
+
+### Create User
+POST http://localhost:3000/users
+Content-Type: application/json
+{
+    "userName": "valery.rey",
+    "email": "valery@gmail.com",
+    "password": "valery123",
+    "role": "user"
+}
+
+### Update User
+PUT http://localhost:3000/users/64a7fbd17eb1b8f23c452001
+Content-Type: application/json
+{
+    "userName": "ana.rey",
+    "email": "anacriollo@gmail.com",
+    "password": "ana123",
+    "role": "user"
+}
+
+### Delete User
+DELETE http://localhost:3000/users/64a7fbd17eb1b8f23c452001
+
+### Get All Pets
+GET http://localhost:3000/pets
+
+### Get Single Pet
+GET http://localhost:3000/pets/64a7fbd17eb1b8f23c452002
+
+### Pet Creation
+POST http://localhost:3000/pets
+Content-Type: application/json
+{
+    "name": "Fluffy",
+    "species": "Cat",
+    "breed": "Siamese",
+    "age": 2,
+    "gender": "Male",
+    "weight": 8,
+    "available": true,
+    "adoptedDate": "2025-01-25",
+    "description": "A playful Siamese cat."
+}
+
+
+### Update Pet
+PUT http://localhost:3000/pets/64a7fbd17eb1b8f23c452002
+Content-Type: application/json
+{
+    "name": "FluffyUpdated",
+    "species": "Cat",
+    "breed": "Siamese",
+    "age": 3,
+    "gender": "Female",
+    "weight": 7,
+    "available": false,
+    "adoptedDate": "2025-01-24",
+    "description": "A calm and friendly Siamese cat."
+}
+
+### Delete Pet
+DELETE http://localhost:3000/pets/64a7fbd17eb1b8f23c452002

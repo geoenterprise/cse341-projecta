@@ -43,7 +43,7 @@ const createPet = async (req, res) => {
     .db()
     .collection('pets')
     .insertOne(newPet);
-  if (result.aknowledged > 0) {
+  if (result.acknowledged > 0) {
     res.status(204).send();
   } else {
     res.status(500).json(result.err || 'Error creating pet');

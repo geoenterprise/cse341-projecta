@@ -38,7 +38,7 @@ const createUser = async (req, res) => {
     .db()
     .collection('users')
     .insertOne(newUser);
-  if (result.aknowledged > 0) {
+  if (result.acknowledged > 0) {
     res.status(204).send();
   } else {
     res.status(500).json(result.err || 'Error creating User');
