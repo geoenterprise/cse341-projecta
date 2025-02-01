@@ -39,7 +39,7 @@ const createUser = async (req, res) => {
     .collection('users')
     .insertOne(newUser);
   if (result.acknowledged > 0) {
-    res.status(204).send();
+    res.status(204).json(result);
   } else {
     res.status(500).json(result.err || 'Error creating User');
   }
@@ -60,7 +60,7 @@ const updateUser = async (req, res) => {
     .collection('users')
     .updateOne({ _id: userId }, { $set: updatedUser });
   if (result.modifiedCount > 0) {
-    res.status(204).send();
+    res.status(204).json(result);
   } else {
     res.status(500).json(result.err || 'Error updating user');
   }

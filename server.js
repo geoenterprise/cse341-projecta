@@ -59,7 +59,7 @@ passport.deserializeUser((user, done) => {
 app.get('/', (req, res) => {
   res.send(
     req.session.user !== undefined
-      ? `Welcome you're logged in as ${req.session.user.displayName}`
+      ? `Welcome you're logged in as ${req.session.user.userName}`
       : 'Logged out'
   );
 });
@@ -71,7 +71,8 @@ app.get(
     session: false,
   }),
   (req, res) => {
-    res.redirect('/api-docs');
+    req.session.user = req.user;
+    res.redirect('/');
   }
 );
 
