@@ -9,7 +9,7 @@ const petValidation = [
     .isLength({ min: 3 })
     .withMessage('Name must be at least 3 characters long'),
 
-  check('species').notEmpty().withMessage('Species is required'),
+  check('species').notEmpty().withMessage('Specie is required'),
 
   check('breed')
     .notEmpty()
