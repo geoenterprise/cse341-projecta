@@ -25,14 +25,14 @@ app
   .use(passport.session())
   .use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader(
-      'Access-Control-Allow-Methods',
+      'Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept, Z-key'
     );
-    res.setHeader('Access-Control-Allow-Headers', 'GET, POST, PUT, DELETE');
     next();
   })
-  .use(cors({ methods: ['GET', 'POST', 'PUT', 'DELETE'] }))
+  .use(cors({ methods: ['GET', 'POST', 'PUT', 'UPDATE', 'DELETE'] }))
   .use(cors({ origin: '*' }))
   .use('/', require('./routes/index'));
 
@@ -41,7 +41,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: process.env.GITHUB_CALLBACK_URL,
+      callbackURL: process.env.CALLBACK_URL,
     },
     function (accessToken, refreshToken, profile, done) {
       return done(null, profile);
