@@ -16,7 +16,7 @@ app
   .use(express.urlencoded({ extended: true }))
   .use(
     session({
-      secret: 'cats',
+      secret: 'secret',
       resave: false,
       saveUninitialized: true,
     })
