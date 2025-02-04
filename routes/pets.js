@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const petValidation = require('../validations/petValidation');
+// const petValidation = require('../validations/petValidation');
 const errorHandling = require('../middlewares/errorHandling');
 const { isAuthenticated } = require('../middlewares/authenticate');
 
@@ -12,7 +12,7 @@ router.get('/:id', petsController.getSinglePet);
 router.post(
   '/',
   isAuthenticated,
-  petValidation,
+  // petValidation,
   errorHandling,
   petsController.createPet
 );
@@ -20,7 +20,7 @@ router.post(
 router.put(
   '/:id',
   isAuthenticated,
-  petValidation,
+  // petValidation,
   errorHandling,
   petsController.updatePet
 );
