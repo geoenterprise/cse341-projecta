@@ -4,25 +4,60 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAllUsers = async (req, res) => {
   //#swagger.tags = ['Users']
-  const result = await mongodb.getDb().db().collection('users').find();
-  result.toArray().then((users) => {
+  // const result = await mongodb.getDb().db().collection('users').find();
+  // result.toArray().then((users) => {
+  //   res.setHeader('Content-Type', 'application/json');
+  //   res.status(200).json(users);
+  // });
+  try {
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('users')
+      .find()
+      .toArray();
+
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(users);
-  });
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
 const getSingleUser = async (req, res) => {
   //#swagger.tags = ['Users']
-  const userId = new ObjectId(req.params.id);
-  const result = await mongodb
-    .getDb()
-    .db()
-    .collection('users')
-    .find({ _id: userId });
-  result.toArray().then((users) => {
+  // const userId = new ObjectId(req.params.id);
+  // const result = await mongodb
+  //   .getDb()
+  //   .db()
+  //   .collection('users')
+  //   .find({ _id: userId });
+  // result.toArray().then((users) => {
+  //   res.setHeader('Content-Type', 'application/json');
+  //   res.status(200).json(users[0]);
+  // });
+  try {
+    if (!ObjectId.isValid(req.params.id)) {
+      res.status(400).json('Must be a valid ID to find');
+      return;
+    }
+    const userId = new ObjectId(req.params.id);
+    const result = await mongodb
+      .getDb()
+      .db()
+      .collection('users')
+      .findOne({ _id: userId });
+
+    if (!result) {
+      res.status(404).json({ message: 'Pet not found' });
+      return;
+    }
+
     res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(users[0]);
-  });
+    res.status(200).json(result);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
 const createUser = async (req, res) => {
@@ -47,6 +82,10 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   //#swagger.tags = ['Users']
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must be a valid ID to update');
+    return;
+  }
   const userId = new ObjectId(req.params.id);
   const updatedUser = {
     userName: req.body.userName,
@@ -60,14 +99,18 @@ const updateUser = async (req, res) => {
     .collection('users')
     .updateOne({ _id: userId }, { $set: updatedUser });
   if (result.modifiedCount > 0) {
-    res.status(200).json();
+    res.status(200).send();
   } else {
-    res.status(500).json(result.err || 'Error updating user');
+    res.status(500).json({ message: 'Error updating user' });
   }
 };
 
 const deleteUser = async (req, res) => {
   //#swagger.tags = ['Users']
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must be a valid ID to delete');
+    return;
+  }
   const userId = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
@@ -75,9 +118,9 @@ const deleteUser = async (req, res) => {
     .collection('users')
     .deleteOne({ _id: userId });
   if (result.deletedCount > 0) {
-    res.status(200).json(result);
+    res.status(200).send();
   } else {
-    res.status(500).json(result.err || 'Error deleting User');
+    res.status(500).json({ message: 'Error deleting User' });
   }
 };
 
